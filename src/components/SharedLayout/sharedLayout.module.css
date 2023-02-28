@@ -1,0 +1,16 @@
+.layout-wrap {
+  border: 1px solid black;
+}
+
+.link-wrap {
+  border: 1px solid black;
+}
+
+.link {
+  text-decoration: none;
+  color: black;
+}
+
+.link.active {
+  color: blue;
+}
