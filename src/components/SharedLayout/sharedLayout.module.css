@@ -1,16 +1,26 @@
-.layout-wrap {
-  border: 1px solid black;
+.layoutWrap {
 }
 
-.link-wrap {
-  border: 1px solid black;
+.linkWrap {
+  border-bottom: 1px solid black;
 }
 
 .link {
   text-decoration: none;
-  color: black;
+  color: aliceblue;
+  background-color: cornflowerblue;
+  border-radius: 4px;
+  padding: 7px;
+  margin-left: 2px;
+  margin-right: 2px;
 }
 
 .link.active {
-  color: blue;
+  background-color: darksalmon;
+}
+
+.menu {
+  list-style: none;
+  display: flex;
+  /* justify-content: space-around; */
 }

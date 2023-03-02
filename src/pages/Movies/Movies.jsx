@@ -1,16 +1,49 @@
 import css from '../Movies/movies.module.css';
-import { Link } from 'react-router-dom';
-import { GoBackBtn } from 'shared/GoBackBtn';
+import { GoBackBtn } from 'shared/GoBackBtn/GoBackBtn';
+import SearchForm from 'components/SearchForm/SearchForm';
+import { useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
+import { searchMovie } from 'shared/api/movies';
+import MoviesList from 'components/MoviesList/MoviesList';
 
 // import { Outlet } from 'react';
 
 const Movies = () => {
+  const [state, setState] = useState({
+    items: [],
+    loading: false,
+    error: null,
+  });
+
+  const [searchParams, setSearchParams] = useSearchParams();
+  const search = searchParams.get('search');
+
+  // const [search, setSearch] = useState('');
+
+  useEffect(() => {
+    const findMovie = async () => {
+      try {
+        const { results } = await searchMovie(search);
+        setState({ items: results });
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    if (search) {
+      findMovie();
+    }
+  }, [search]);
+
+  const changeSearch = ({ search }) => {
+    setSearchParams({ search });
+  };
+
+  const { items } = state;
+
   return (
     <>
-      <div>Movies</div>
-      <Link to="/movies/1">MovieDetails</Link>
-      <input type="text" placeholder="Enter the movie you are looking for!" />
-      <button>Search</button>
+      <SearchForm onSubmit={changeSearch} />
+      {items.length > 0 && <MoviesList movies={items} />}
       <GoBackBtn />
     </>
   );
