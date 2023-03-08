@@ -1,7 +1,7 @@
 import css from '../Cast/cast.module.css';
 
 import { getMovieCast } from 'shared/api/movies';
-import useAdditionalFetch from 'hooks/useFetch';
+// import useAdditionalFetch from 'hooks/useFetch';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
