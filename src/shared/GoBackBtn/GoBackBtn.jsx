@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import css from '../GoBackBtn/goBackBtn.module.css';
 import { useNavigate, useLocation } from 'react-router-dom';
 
@@ -15,10 +14,3 @@ export const GoBackBtn = () => {
     </button>
   );
 };
-
-{
-  /* <Link className={css.backBtn} to="/">
-        To the <br />
-        main page
-      </Link> */
-}

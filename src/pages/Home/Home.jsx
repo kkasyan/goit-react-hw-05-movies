@@ -1,8 +1,6 @@
-import css from '../Home/home.module.css';
 import { lazy } from 'react';
 import { useState, useEffect } from 'react';
 import { getTrendingMovies } from 'shared/api/movies';
-import useFetch from 'hooks/useFetch';
 
 const MoviesList = lazy(() => import('../../components/MoviesList/MoviesList'));
 

@@ -1,6 +1,5 @@
 import css from '../MovieDetails/movieDetails.module.css';
 import { NavLink, useParams, useLocation, Outlet } from 'react-router-dom';
-import { useState, useEffect } from 'react';
 import { getMovieDetails } from 'shared/api/movies';
 import useFetch from 'hooks/useFetch';
 
@@ -15,40 +14,12 @@ const MovieDetails = () => {
   const location = useLocation();
   const from = location.state?.from || '/';
 
-  // const [movie, setMovie] = useState({});
-  // const [isLoading, setIsLoading] = useState(false);
-  // const [error, setError] = useState(null);
   const { movie, isLoading, error } = useFetch({
     fetchData: getMovieDetails,
     dependencies: [id],
   });
-  // useEffect(() => {
-  //   if (!id) {
-  //     return;
-  //   }
-  //   const fetchMovie = async () => {
-  //     try {
-  //       setIsLoading(true);
-  //       const result = await getMovieDetails(id);
-  //       setMovie(result);
-  //       setIsLoading(false);
-  //     } catch (error) {
-  //       console.log(error);
-  //       setError(true);
-  //     }
-  //   };
-  //   fetchMovie();
-  // }, [id]);
 
-  const {
-    title,
-    overview,
-    backdrop_path,
-    poster_path,
-    genre_ids,
-    genres,
-    vote_average,
-  } = movie;
+  const { title, overview, poster_path, genres, vote_average } = movie;
 
   return (
     <>

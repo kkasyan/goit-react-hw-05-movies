@@ -27,7 +27,7 @@ const useFetch = ({ fetchData, dependencies, isFetch }) => {
       return;
     }
     fetchMovie();
-  }, [...dependencies]);
+  }, [dependencies]);
 
   if (isFetch) {
     return;
