@@ -1,88 +1,97 @@
 import css from '../MovieDetails/movieDetails.module.css';
-import {
-  Link,
-  NavLink,
-  useParams,
-  useLocation,
-  Outlet,
-} from 'react-router-dom';
+import { NavLink, useParams, useLocation, Outlet } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { getMovieDetails } from 'shared/api/movies';
+import useFetch from 'hooks/useFetch';
 
 import { GoBackBtn } from 'shared/GoBackBtn/GoBackBtn';
 
+const imgURL = 'https://image.tmdb.org/t/p/w500';
+
 const MovieDetails = () => {
-  // const { id } = useParams();
   const params = useParams();
   const { id } = params;
 
   const location = useLocation();
   const from = location.state?.from || '/';
 
-  const [movieD, setMovie] = useState({});
-  const [isLoading, setIsLoading] = useState(false);
-  //   return <Link to={`${movieId}`}>MovieDetails</Link>;
-  //   return <Link to="/1">MovieDetails</Link>;
+  // const [movie, setMovie] = useState({});
+  // const [isLoading, setIsLoading] = useState(false);
+  // const [error, setError] = useState(null);
+  const { movie, isLoading, error } = useFetch({
+    fetchData: getMovieDetails,
+    dependencies: [id],
+  });
+  // useEffect(() => {
+  //   if (!id) {
+  //     return;
+  //   }
+  //   const fetchMovie = async () => {
+  //     try {
+  //       setIsLoading(true);
+  //       const result = await getMovieDetails(id);
+  //       setMovie(result);
+  //       setIsLoading(false);
+  //     } catch (error) {
+  //       console.log(error);
+  //       setError(true);
+  //     }
+  //   };
+  //   fetchMovie();
+  // }, [id]);
 
-  useEffect(() => {
-    const fetchMovie = async () => {
-      // setState({ ...state, loading: true });
-      try {
-        setIsLoading(true);
-        const { result } = await getMovieDetails(id);
-        // setState(prevState => {
-        //   return {
-        //     ...prevState,
-        //   };
-        // });
-        setMovie(result);
-        // setIsLoading(false);
-      } catch (error) {
-        console.log(error);
-        // setState({
-        //   ...state,
-        //   error,
-        // });
-      } finally {
-        setIsLoading(false);
-      }
-      // } finally {
-      //   setState(prevState => {
-      //     return { ...prevState, loading: false };
-      //   });
-      // }
-    };
-    fetchMovie();
-    console.log(movieD);
-  }, [movieD, id]);
-
-  // const { title, name, overview, backdrop_path, genre_ids, popularity } = movie;
-  // const { title } = movieD;
-  // const { overview } = movie;
+  const {
+    title,
+    overview,
+    backdrop_path,
+    poster_path,
+    genre_ids,
+    genres,
+    vote_average,
+  } = movie;
 
   return (
     <>
       <GoBackBtn />
-      <h2></h2>
-      <p>User score:%</p>
-      <h2>Overview</h2>
-      <p></p>
-      <h2>Genres</h2>
-      <p>Genres list</p>
-      <h2>Additional Information:</h2>
-      <ul>
-        <li>
-          <NavLink className={css.link} state={{ from }} to="cast">
-            Cast
-          </NavLink>
-        </li>
-        <li>
-          <NavLink className={css.link} state={{ from }} to="reviews">
-            Reviews
-          </NavLink>
-        </li>
-      </ul>
-      <Outlet />
+      {movie && (
+        <>
+          <div className={css.wrap}>
+            {poster_path && (
+              <img src={`${imgURL}${poster_path}`} alt="movie poster" />
+            )}
+            {!poster_path && (
+              <img
+                src="https://www.prokerala.com/movies/assets/img/no-poster-available.jpg"
+                alt="no movie poster!"
+              />
+            )}
+            <div className={css.infoWrap}>
+              <h2>{title}</h2>
+              <p>User score: {Math.floor(vote_average * 10)}%</p>
+              <h2>Overview</h2>
+              <p>{overview}</p>
+              <h2>Genres</h2>
+              <p>{genres && genres.map(genre => genre.name).join(', ')}</p>
+            </div>
+          </div>
+          <h2>Additional Information:</h2>
+          <ul className={css.list}>
+            <li>
+              <NavLink className={css.link} state={{ from }} to="cast">
+                Cast
+              </NavLink>
+            </li>
+            <li>
+              <NavLink className={css.link} state={{ from }} to="reviews">
+                Reviews
+              </NavLink>
+            </li>
+          </ul>
+          <Outlet />
+        </>
+      )}
+      {isLoading && <p>Loading...</p>}
+      {error && <p>Error!</p>}
     </>
   );
 };

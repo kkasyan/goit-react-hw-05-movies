@@ -1,5 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
-import { lazy, Suspense, Outlet } from 'react';
+import { lazy, Suspense } from 'react';
 
 import { SharedLayout } from './components/SharedLayout/SharedLayout';
 

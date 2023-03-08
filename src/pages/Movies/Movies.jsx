@@ -6,8 +6,6 @@ import { useSearchParams } from 'react-router-dom';
 import { searchMovie } from 'shared/api/movies';
 import MoviesList from 'components/MoviesList/MoviesList';
 
-// import { Outlet } from 'react';
-
 const Movies = () => {
   const [state, setState] = useState({
     items: [],

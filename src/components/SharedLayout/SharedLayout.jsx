@@ -1,6 +1,5 @@
 import css from '../SharedLayout/sharedLayout.module.css';
-import { Link, NavLink, Outlet } from 'react-router-dom';
-import { Suspense } from 'react';
+import { NavLink, Outlet } from 'react-router-dom';
 
 const getClassName = ({ isActive }) => {
   const className = isActive ? `${css.link} ${css.active}` : css.link;
