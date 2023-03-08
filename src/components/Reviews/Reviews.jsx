@@ -1,7 +1,7 @@
 import css from '../Reviews/reviews.module.css';
 
 import { getMovieReviews } from 'shared/api/movies';
-import useAdditionalFetch from 'hooks/useFetch';
+// import useAdditionalFetch from 'hooks/useFetch';
 
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';

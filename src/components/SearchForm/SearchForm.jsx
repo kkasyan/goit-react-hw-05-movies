@@ -23,6 +23,7 @@ const SearchForm = ({ onSubmit }) => {
   return (
     <form onSubmit={handleSubmit}>
       <input
+        className={css.input}
         name="search"
         value={state.search}
         onChange={handleChange}

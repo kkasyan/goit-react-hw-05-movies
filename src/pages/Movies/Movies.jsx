@@ -1,4 +1,3 @@
-import css from '../Movies/movies.module.css';
 import { GoBackBtn } from 'shared/GoBackBtn/GoBackBtn';
 import SearchForm from 'components/SearchForm/SearchForm';
 import { useState, useEffect } from 'react';
@@ -15,8 +14,6 @@ const Movies = () => {
 
   const [searchParams, setSearchParams] = useSearchParams();
   const search = searchParams.get('search');
-
-  // const [search, setSearch] = useState('');
 
   useEffect(() => {
     const findMovie = async () => {

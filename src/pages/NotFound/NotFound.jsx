@@ -1,4 +1,3 @@
-import css from '../NotFound/notFound.module.css';
 import { GoBackBtn } from '../../shared/GoBackBtn/GoBackBtn';
 
 const NotFound = () => {
