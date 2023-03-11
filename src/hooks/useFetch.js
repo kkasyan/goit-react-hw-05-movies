@@ -5,6 +5,7 @@ const useFetch = ({ fetchData, dependencies, isFetch }) => {
   const [movie, setMovie] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+
   const params = useParams();
   const { id } = params;
 
@@ -27,7 +28,8 @@ const useFetch = ({ fetchData, dependencies, isFetch }) => {
       return;
     }
     fetchMovie();
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [...dependencies]);
 
   if (isFetch) {
     return;
