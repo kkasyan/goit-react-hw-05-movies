@@ -61,7 +61,7 @@ const MovieDetails = () => {
           <Outlet />
         </>
       )}
-      {isLoading && <p>Loading...</p>}
+      {isLoading && <p>...Loading...</p>}
       {error && <p>Error!</p>}
     </>
   );

@@ -1,16 +1,28 @@
 import css from '../Cast/cast.module.css';
 
 import { getMovieCast } from 'shared/api/movies';
-// import useAdditionalFetch from 'hooks/useFetch';
+// import useAdditionalFetch from 'hooks/useAdditionalFetch';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 const imgURL = 'https://image.tmdb.org/t/p/w500';
 
+// const Cast = ({ name, character, profile_path, cast }) => {
+//   const params = useParams();
+//   const { id } = params;
+//   const { actors, isLoading, error } = useAdditionalFetch({
+//     fetchData: getMovieCast,
+//     returnDetails: {
+//       id: id,
+//       name: name,
+//       character: character,
+//       photo: profile_path,
+//     },
+//     information: cast,
+//   });
 const Cast = () => {
   const params = useParams();
   const { id } = params;
-
   const [cast, setCast] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -66,7 +78,7 @@ const Cast = () => {
           );
         })}
       </ul>
-      {isLoading && <p>Loading...</p>}
+      {isLoading && <p>...Loading...</p>}
       {error && <p>Error!</p>}
     </div>
   );
