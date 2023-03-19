@@ -1,5 +1,12 @@
 import css from '../SharedLayout/sharedLayout.module.css';
 import { NavLink, Outlet } from 'react-router-dom';
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
+import LocalMoviesIcon from '@mui/icons-material/LocalMovies';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
 
 const getClassName = ({ isActive }) => {
   const className = isActive ? `${css.link} ${css.active}` : css.link;
@@ -9,24 +16,43 @@ const getClassName = ({ isActive }) => {
 export const SharedLayout = () => {
   return (
     <>
-      <div className={css.layoutWrap}>
-        <nav className={css.linkWrap}>
-          <ul className={css.menu}>
-            <li>
-              <NavLink className={getClassName} to="/">
-                Home
-              </NavLink>
-            </li>
-            <li>
-              <NavLink className={getClassName} to="/movies">
-                Movies
-              </NavLink>
-            </li>
-          </ul>
-        </nav>
-
-        <Outlet />
-      </div>
+      <AppBar position="static">
+        <Container maxWidth="xl">
+          <Toolbar disableGutters>
+            <LocalMoviesIcon
+              sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }}
+            />
+            <Typography
+              variant="h2"
+              noWrap
+              sx={{
+                mr: 2,
+                display: { xs: 'none', md: 'flex' },
+                fontFamily: 'monospace',
+                fontWeight: 700,
+                letterSpacing: '.3rem',
+                color: 'inherit',
+                textDecoration: 'none',
+                fontSize: 32,
+              }}
+            >
+              <List sx={{ display: 'flex', justifyContent: 'flex-start' }}>
+                <ListItem>
+                  <NavLink className={getClassName} to="/">
+                    Home
+                  </NavLink>
+                </ListItem>
+                <ListItem>
+                  <NavLink className={getClassName} to="/movies">
+                    Movies
+                  </NavLink>
+                </ListItem>
+              </List>
+            </Typography>
+          </Toolbar>
+        </Container>
+      </AppBar>
+      <Outlet />
     </>
   );
 };

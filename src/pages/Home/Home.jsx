@@ -2,6 +2,11 @@ import { lazy } from 'react';
 import { useState, useEffect } from 'react';
 import { getTrendingMovies } from 'shared/api/movies';
 
+import Typography from '@mui/material/Typography';
+import CircularProgress from '@mui/material/CircularProgress';
+
+import Alert from '@mui/material/Alert';
+
 const MoviesList = lazy(() => import('../../components/MoviesList/MoviesList'));
 
 const Home = () => {
@@ -26,10 +31,28 @@ const Home = () => {
 
   return (
     <div>
-      <h2>Trending today</h2>
+      <Typography
+        variant="h2"
+        noWrap
+        sx={{
+          mr: 2,
+          display: { xs: 'none', md: 'flex' },
+          fontFamily: 'monospace',
+          fontWeight: 700,
+          letterSpacing: '.3rem',
+          color: 'inherit',
+          textDecoration: 'none',
+        }}
+      >
+        Trending today
+      </Typography>
       {movies.length > 0 && <MoviesList movies={movies} />}
-      {isLoading && <p>Loading...</p>}
-      {error && <p>Error!</p>}
+      {isLoading && <CircularProgress color="secondary" />}
+      {error && (
+        <Alert severity="error">
+          Ohh... Something went wrong! Let's try again later!
+        </Alert>
+      )}
     </div>
   );
 };

@@ -3,6 +3,8 @@ import { lazy, Suspense } from 'react';
 
 import { SharedLayout } from './components/SharedLayout/SharedLayout';
 
+import LinearProgress from '@mui/material/LinearProgress';
+
 const Home = lazy(() => import('./pages/Home/Home'));
 const Movies = lazy(() => import('./pages/Movies/Movies'));
 const NotFound = lazy(() => import('./pages/NotFound/NotFound'));
@@ -13,7 +15,7 @@ const Reviews = lazy(() => import('./components/Reviews/Reviews'));
 const UserRoutes = () => {
   return (
     <>
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<LinearProgress color="secondary" />}>
         <Routes>
           <Route path="/" element={<SharedLayout />}>
             <Route index element={<Home />} />
