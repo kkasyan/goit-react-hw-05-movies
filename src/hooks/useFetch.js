@@ -22,6 +22,8 @@ const useFetch = ({ fetchData, dependencies, isFetch }) => {
         setIsLoading(false);
       } catch (error) {
         setError(error);
+      } finally {
+        setIsLoading(false);
       }
     };
     if (isFetch) {

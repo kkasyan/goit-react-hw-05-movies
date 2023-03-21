@@ -44,6 +44,8 @@ const Cast = () => {
       } catch (error) {
         console.log(error);
         setError(true);
+      } finally {
+        setIsLoading(false);
       }
     };
     fetchActors();

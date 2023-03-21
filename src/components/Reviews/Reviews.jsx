@@ -39,6 +39,8 @@ const Reviews = () => {
       } catch (error) {
         console.log(error);
         setError(true);
+      } finally {
+        setIsLoading(false);
       }
     };
     fetchActors();
@@ -46,7 +48,7 @@ const Reviews = () => {
 
   return (
     <>
-      {reviews.length === 0 && (
+      {reviews.length === 0 && !error && (
         <Typography
           variant="list"
           sx={{

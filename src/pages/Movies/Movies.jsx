@@ -8,7 +8,6 @@ import MoviesList from 'components/MoviesList/MoviesList';
 const Movies = () => {
   const [state, setState] = useState({
     items: [],
-    loading: false,
     error: null,
   });
 
