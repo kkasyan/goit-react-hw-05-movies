@@ -1,28 +1,21 @@
 import css from '../Cast/cast.module.css';
+
 import Grid from '@mui/material/Grid';
 import ListItem from '@mui/material/ListItem';
 import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
+
 import { getMovieCast } from 'shared/api/movies';
-// import useAdditionalFetch from 'hooks/useAdditionalFetch';
+import { ErrorNotification } from 'shared/ErrorNotification/ErrorNotification';
+
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+
 import BackToTop from 'react-back-to-top';
+import { FallingLines } from 'react-loader-spinner';
 
 const imgURL = 'https://image.tmdb.org/t/p/w500';
 
-// const Cast = ({ name, character, profile_path, cast }) => {
-//   const params = useParams();
-//   const { id } = params;
-//   const { actors, isLoading, error } = useAdditionalFetch({
-//     fetchData: getMovieCast,
-//     returnDetails: {
-//       id: id,
-//       name: name,
-//       character: character,
-//       photo: profile_path,
-//     },
-//     information: cast,
-//   });
 const Cast = () => {
   const params = useParams();
   const { id } = params;
@@ -57,7 +50,7 @@ const Cast = () => {
   }, [id]);
 
   return (
-    <div>
+    <Box>
       <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
         {cast.map(actor => {
           return (
@@ -76,26 +69,8 @@ const Cast = () => {
                     alt="no actor available"
                   />
                 )}
-                <Typography
-                  variant="p"
-                  sx={{
-                    fontFamily: 'monospace',
-                    fontSize: 16,
-                    fontWeight: 400,
-                    color: 'inherit',
-                  }}
-                >
-                  {actor.name}
-                </Typography>
-                <Typography
-                  variant="p"
-                  sx={{
-                    fontFamily: 'monospace',
-                    fontSize: 16,
-                    fontWeight: 400,
-                    color: 'inherit',
-                  }}
-                >
+                <Typography variant="list">{actor.name}</Typography>
+                <Typography variant="list">
                   Character: {actor.character}
                 </Typography>
               </ListItem>
@@ -107,7 +82,6 @@ const Cast = () => {
         mainStyle={{
           width: '100%',
           height: '100%',
-          background: 'url(...)',
         }}
         percentStyle={{
           width: '100%',
@@ -119,9 +93,16 @@ const Cast = () => {
         percent={true}
         visiblePercent={50}
       />
-      {isLoading && <p>...Loading...</p>}
-      {error && <p>Error!</p>}
-    </div>
+      {isLoading && (
+        <FallingLines
+          color="#4fa94d"
+          width="100"
+          visible={true}
+          ariaLabel="falling-lines-loading"
+        />
+      )}
+      {error && <ErrorNotification />}
+    </Box>
   );
 };
 

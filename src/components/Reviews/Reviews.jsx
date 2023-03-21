@@ -1,17 +1,15 @@
-import css from '../Reviews/reviews.module.css';
-
 import { getMovieReviews } from 'shared/api/movies';
-// import useAdditionalFetch from 'hooks/useFetch';
+import { ErrorNotification } from 'shared/ErrorNotification/ErrorNotification';
 
 import Typography from '@mui/material/Typography';
 import ListItem from '@mui/material/ListItem';
 import List from '@mui/material/List';
-import Box from '@mui/material/Box';
 
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 import BackToTop from 'react-back-to-top';
+import { Comment } from 'react-loader-spinner';
 
 const Reviews = () => {
   const [reviews, setReviews] = useState([]);
@@ -50,12 +48,8 @@ const Reviews = () => {
     <>
       {reviews.length === 0 && (
         <Typography
-          variant="p"
+          variant="list"
           sx={{
-            fontFamily: 'monospace',
-            fontSize: 16,
-            fontWeight: 400,
-            color: 'inherit',
             p: 2,
           }}
         >
@@ -72,26 +66,18 @@ const Reviews = () => {
                   key={review.id}
                 >
                   <Typography
-                    variant="h2"
+                    variant="reviewAuthor"
                     noWrap
                     sx={{
                       mr: 2,
                       display: { xs: 'none', md: 'flex' },
-                      fontFamily: 'monospace',
-                      fontWeight: 500,
-                      color: 'inherit',
-                      fontSize: 20,
                     }}
                   >
                     Author: {review.author}
                   </Typography>
                   <Typography
-                    variant="p"
+                    variant="list"
                     sx={{
-                      fontFamily: 'monospace',
-                      fontSize: 16,
-                      fontWeight: 400,
-                      color: 'inherit',
                       m: 2,
                     }}
                   >
@@ -119,8 +105,19 @@ const Reviews = () => {
           />
         </>
       )}
-      {isLoading && <p>Loading...</p>}
-      {error && <p>Error!</p>}
+      {isLoading && (
+        <Comment
+          visible={true}
+          height="80"
+          width="80"
+          ariaLabel="comment-loading"
+          wrapperStyle={{}}
+          wrapperClass="comment-wrapper"
+          color="#fff"
+          backgroundColor="#F4442E"
+        />
+      )}
+      {error && <ErrorNotification />}
     </>
   );
 };

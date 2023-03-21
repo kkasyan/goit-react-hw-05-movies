@@ -1,5 +1,6 @@
 import css from '../SharedLayout/sharedLayout.module.css';
 import { NavLink, Outlet } from 'react-router-dom';
+
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
@@ -23,17 +24,11 @@ export const SharedLayout = () => {
               sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }}
             />
             <Typography
-              variant="h2"
+              variant="menu"
               noWrap
               sx={{
                 mr: 2,
                 display: { xs: 'none', md: 'flex' },
-                fontFamily: 'monospace',
-                fontWeight: 700,
-                letterSpacing: '.3rem',
-                color: 'inherit',
-                textDecoration: 'none',
-                fontSize: 32,
               }}
             >
               <List sx={{ display: 'flex', justifyContent: 'flex-start' }}>

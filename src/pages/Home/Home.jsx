@@ -1,11 +1,10 @@
-import { lazy } from 'react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, lazy } from 'react';
 import { getTrendingMovies } from 'shared/api/movies';
+import { ErrorNotification } from 'shared/ErrorNotification/ErrorNotification';
 
 import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
-
-import Alert from '@mui/material/Alert';
 
 const MoviesList = lazy(() => import('../../components/MoviesList/MoviesList'));
 
@@ -30,30 +29,22 @@ const Home = () => {
   }, []);
 
   return (
-    <div>
+    <Box>
       <Typography
-        variant="h2"
+        variant="trending"
         noWrap
         sx={{
+          mt: 2,
           mr: 2,
           display: { xs: 'none', md: 'flex' },
-          fontFamily: 'monospace',
-          fontWeight: 700,
-          letterSpacing: '.3rem',
-          color: 'inherit',
-          textDecoration: 'none',
         }}
       >
         Trending today
       </Typography>
       {movies.length > 0 && <MoviesList movies={movies} />}
       {isLoading && <CircularProgress color="secondary" />}
-      {error && (
-        <Alert severity="error">
-          Ohh... Something went wrong! Let's try again later!
-        </Alert>
-      )}
-    </div>
+      {error && <ErrorNotification />}
+    </Box>
   );
 };
 

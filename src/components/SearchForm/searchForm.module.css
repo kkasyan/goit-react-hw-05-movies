@@ -1,8 +1,3 @@
-.input {
-  width: 300px;
-  margin-right: 5px;
-}
-
 .btn {
   padding: 7px;
   background-color: antiquewhite;
@@ -11,15 +6,8 @@
   margin: 5px;
   text-decoration: none;
   color: darkgray;
-  font-size: 15px;
   cursor: pointer;
 }
-
-/* .backBtn {
-  text-decoration: none;
-  color: darkgray;
-  font-size: 15px;
-} */
 
 .btn:hover {
   background-color: cadetblue;

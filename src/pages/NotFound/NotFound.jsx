@@ -6,15 +6,7 @@ const NotFound = () => {
   return (
     <>
       <Box sx={{ p: 2 }}>
-        <Typography
-          variant="p"
-          sx={{
-            fontFamily: 'monospace',
-            fontSize: 16,
-            fontWeight: 400,
-            color: 'inherit',
-          }}
-        >
+        <Typography variant="list">
           The page is not found!💀
           <br />
           Hope the next time you will find what you are looking for!

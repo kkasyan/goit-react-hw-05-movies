@@ -11,15 +11,11 @@ const MoviesList = ({ movies }) => {
 
   const elements = movies.map(movie => (
     <Typography
-      variant="h4"
+      variant="list"
       noWrap
       sx={{
         mr: 2,
         display: { xs: 'none', md: 'flex' },
-        fontFamily: 'monospace',
-        fontWeight: 400,
-        fontSize: 16,
-        color: 'inherit',
       }}
       key={movie.id}
     >

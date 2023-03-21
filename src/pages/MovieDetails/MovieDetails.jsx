@@ -2,9 +2,11 @@ import css from '../MovieDetails/movieDetails.module.css';
 import { NavLink, useParams, useLocation, Outlet } from 'react-router-dom';
 import { getMovieDetails } from 'shared/api/movies';
 import useFetch from 'hooks/useFetch';
+
 import Typography from '@mui/material/Typography';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
+import Box from '@mui/material/Box';
 
 import { GoBackBtn } from 'shared/GoBackBtn/GoBackBtn';
 
@@ -29,7 +31,7 @@ const MovieDetails = () => {
       <GoBackBtn />
       {movie && (
         <>
-          <div className={css.wrap}>
+          <Box sx={{ display: 'flex' }}>
             {poster_path && (
               <img src={`${imgURL}${poster_path}`} alt="movie poster" />
             )}
@@ -39,133 +41,47 @@ const MovieDetails = () => {
                 alt="no movie poster!"
               />
             )}
-            <div className={css.infoWrap}>
-              <Typography
-                variant="h2"
-                sx={{
-                  mr: 2,
-                  display: { xs: 'none', md: 'flex' },
-                  fontFamily: 'monospace',
-                  fontWeight: 400,
-                  color: 'inherit',
-                }}
-              >
+            <Box ml={2} sx={{ display: 'flex', flexDirection: 'column' }}>
+              <Typography variant="title" sx={{ mr: 2 }}>
                 {title}
               </Typography>
-
-              <Typography
-                variant="h2"
-                noWrap
-                sx={{
-                  fontFamily: 'monospace',
-                  fontSize: 18,
-                  fontWeight: 400,
-                  color: 'inherit',
-                }}
-              >
+              <Typography variant="userScore" sx={{ pt: 2 }} noWrap>
                 User score: {Math.floor(vote_average * 10)}%
               </Typography>
               <Typography
-                variant="h2"
+                variant="descriptionTitle"
+                sx={{ p: 2, mr: 2 }}
                 noWrap
-                sx={{
-                  mr: 2,
-                  display: { xs: 'none', md: 'flex' },
-                  fontFamily: 'monospace',
-                  fontWeight: 500,
-                  color: 'inherit',
-                  fontSize: 20,
-                  p: 2,
-                }}
               >
                 Overview
               </Typography>
+              <Typography variant="list">{overview}</Typography>
               <Typography
-                variant="p"
-                sx={{
-                  fontFamily: 'monospace',
-                  fontSize: 16,
-                  fontWeight: 400,
-                  color: 'inherit',
-                }}
-              >
-                {overview}
-              </Typography>
-              <Typography
-                variant="h2"
+                variant="descriptionTitle"
+                sx={{ p: 2, mr: 2 }}
                 noWrap
-                sx={{
-                  mr: 2,
-                  display: { xs: 'none', md: 'flex' },
-                  fontFamily: 'monospace',
-                  fontWeight: 500,
-                  color: 'inherit',
-                  fontSize: 20,
-                  p: 2,
-                }}
               >
                 Genres
               </Typography>
-              <Typography
-                variant="p"
-                sx={{
-                  fontFamily: 'monospace',
-                  fontSize: 16,
-                  fontWeight: 400,
-                  color: 'inherit',
-                }}
-              >
+              <Typography variant="list">
                 {genres && genres.map(genre => genre.name).join(', ')}
               </Typography>
-            </div>
-          </div>
-          <Typography
-            variant="h2"
-            noWrap
-            sx={{
-              mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
-              fontWeight: 500,
-              color: 'inherit',
-              fontSize: 20,
-            }}
-          >
+            </Box>
+          </Box>
+          <Typography variant="addInfoTitle" noWrap>
             Additional Information:
           </Typography>
           <List>
             <ListItem>
               <NavLink className={css.link} state={{ from }} to="cast">
-                <Typography
-                  variant="h3"
-                  noWrap
-                  sx={{
-                    mr: 2,
-                    display: { xs: 'none', md: 'flex' },
-                    fontFamily: 'monospace',
-                    fontWeight: 500,
-                    color: 'inherit',
-                    fontSize: 20,
-                  }}
-                >
+                <Typography variant="addInfoTitle" noWrap>
                   Cast
                 </Typography>
               </NavLink>
             </ListItem>
             <ListItem>
               <NavLink className={css.link} state={{ from }} to="reviews">
-                <Typography
-                  variant="h3"
-                  noWrap
-                  sx={{
-                    mr: 2,
-                    display: { xs: 'none', md: 'flex' },
-                    fontFamily: 'monospace',
-                    fontWeight: 500,
-                    color: 'inherit',
-                    fontSize: 20,
-                  }}
-                >
+                <Typography variant="addInfoTitle" noWrap>
                   Reviews
                 </Typography>
               </NavLink>

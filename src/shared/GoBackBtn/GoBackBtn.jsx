@@ -18,15 +18,11 @@ export const GoBackBtn = () => {
       sx={{ m: 2 }}
     >
       <Typography
-        variant="h2"
+        variant="button"
         noWrap
         sx={{
           mr: 2,
           display: { xs: 'none', md: 'flex' },
-          fontFamily: 'monospace',
-          fontWeight: 500,
-          color: 'inherit',
-          fontSize: 20,
         }}
       >
         Back
